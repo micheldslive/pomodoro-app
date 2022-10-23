@@ -15,4 +15,10 @@ export default defineConfig((configEnv) => ({
       linters: [new EsLinter({ configEnv })],
     }),
   ],
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: '.vitest//setupTests.ts',
+    css: true,
+  },
 }))
