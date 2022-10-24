@@ -1,32 +1,52 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
 import './App.css'
+import Header from './components/Header'
+import Controls from './components/Controls'
+import TimerDisplay from './components/TimerDisplay'
+import { Button } from './components/Button'
+import Settings from './components/Settings'
+import { useEffect } from 'react'
+import useSound from 'use-sound'
+import timesUpSfx from './sounds/timesUp.mp3'
+import { useStatesContext } from './core/context'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const {
+    secondsLeft,
+    setSecondsLeft,
+    isActive,
+    setIsActive,
+    setButtonText,
+    volume,
+  } = useStatesContext()
+
+  const [timesUp] = useSound(timesUpSfx, {
+    volume: volume,
+  })
+
+  useEffect(() => {
+    if (isActive) {
+      const interval = setInterval(() => {
+        setSecondsLeft(secondsLeft - 1)
+      }, 1000)
+
+      if (secondsLeft === 0) {
+        clearInterval(interval)
+        setIsActive(false)
+        setButtonText('')
+        timesUp()
+      }
+
+      return () => clearInterval(interval)
+    }
+  }, [isActive, secondsLeft, timesUp])
 
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+    <div className='pomodoro-app'>
+      <Header title='pomodoro' />
+      <Controls />
+      <TimerDisplay />
+      <Button type='settings' />
+      <Settings />
     </div>
   )
 }
