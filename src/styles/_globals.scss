@@ -69,3 +69,12 @@ a:hover {
 button:focus:not(:focus-visible) {
   outline: 0;
 }
+
+@keyframes fade {
+  from {
+    opacity: 0%;
+  }
+  to {
+    opacity: 100%;
+  }
+}
