@@ -1,13 +1,12 @@
 import './App.css'
-import Header from './components/Header'
-import Controls from './components/Controls'
-import TimerDisplay from './components/TimerDisplay'
-import { Button } from './components/Button'
-import Settings from './components/Settings'
+import Header from '@/components/Header'
+import Controls from '@/components/Controls'
+import TimerDisplay from '@/components/TimerDisplay'
+import { Button } from '@/components/Button'
+import Settings from '@/components/Settings'
 import { useEffect } from 'react'
-import useSound from 'use-sound'
-import timesUpSfx from './sounds/timesUp.mp3'
-import { useStatesContext } from './core/context'
+import { useStatesContext } from '@/core/context'
+import { useSounds } from '@/core/utils'
 
 function App() {
   const {
@@ -19,9 +18,7 @@ function App() {
     volume,
   } = useStatesContext()
 
-  const [timesUp] = useSound(timesUpSfx, {
-    volume: volume,
-  })
+  const { up } = useSounds(volume)
 
   useEffect(() => {
     if (isActive) {
@@ -33,12 +30,12 @@ function App() {
         clearInterval(interval)
         setIsActive(false)
         setButtonText('')
-        timesUp()
+        up()
       }
 
       return () => clearInterval(interval)
     }
-  }, [isActive, secondsLeft, timesUp])
+  }, [isActive, secondsLeft, up])
 
   return (
     <div className='pomodoro-app'>
