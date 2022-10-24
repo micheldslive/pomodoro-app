@@ -4,8 +4,8 @@ interface HeaderProps {
 
 const Header = ({ title }: HeaderProps) => {
   return (
-    <header className='header'>
-      <h1 className='header__title'>{title}</h1>
+    <header>
+      <h1 className='pomodoro-app__title'>{title}</h1>
     </header>
   )
 }
