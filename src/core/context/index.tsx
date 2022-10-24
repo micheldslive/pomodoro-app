@@ -22,7 +22,7 @@ const initialStates: IStatesContext = {
   secondsLeft: pomoLength * 60,
   isActive: false,
   buttonText: 'START',
-  volume: true,
+  volume: 1,
 }
 
 const contextStates = {} as IStatesDefaultValues
@@ -96,7 +96,7 @@ const StatesProvider = ({ children }: IChildren) => {
   const setButtonText = (buttonText: string) => {
     dispatch({ type: 'buttonText', buttonText })
   }
-  const setVolume = (volume: boolean) => {
+  const setVolume = (volume: number) => {
     dispatch({ type: 'volume', volume })
   }
 
