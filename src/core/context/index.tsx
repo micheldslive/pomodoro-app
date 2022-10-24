@@ -5,15 +5,18 @@ import {
   IStatesDefaultValues,
   TActionStatesContext,
 } from '@/core/types'
+import { formatNumber } from '@/core/utils'
 
-const pomoLength = 25
+const pomoLength = formatNumber(process.env.POMO_LENGTH, '25')
+const shortLength = formatNumber(process.env.SHORT_LENGTH, '3')
+const longLength = formatNumber(process.env.LONG_LENGTH, '15')
 
 const initialStates: IStatesContext = {
   settingsVisible: false,
   timerMode: 'pomo', // options: pomo, short, long
   pomoLength,
-  shortLength: 3,
-  longLength: 15,
+  shortLength,
+  longLength,
   fontPref: 'kumbh', // options: kumbh, roboto, space
   accentColor: 'default', // options: default, blue, purple
   secondsLeft: pomoLength * 60,

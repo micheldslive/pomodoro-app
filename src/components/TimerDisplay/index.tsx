@@ -4,12 +4,9 @@ import {
   buildStyles,
 } from 'react-circular-progressbar'
 import 'react-circular-progressbar/dist/styles.css'
-import useSound from 'use-sound'
-import startSfx from '@/sounds/startTimer.mp3'
-import pauseSfx from '@/sounds/pauseTimer.mp3'
 import { useStatesContext } from '@/core/context'
 import { IMapedNumbers } from '@/core/types'
-import { calcPercentage, formatTimeLeft } from '@/core/utils'
+import { calcPercentage, formatTimeLeft, useSounds } from '@/core/utils'
 import { MouseEvent } from 'react'
 
 const TimerDisplay = () => {
@@ -38,29 +35,15 @@ const TimerDisplay = () => {
 
   const timeLeft = formatTimeLeft(secondsLeft)
 
-  const [play] = useSound(startSfx, {
-    interrupt: true,
-    volume: volume,
-  })
-  const [pause] = useSound(pauseSfx, {
-    interupt: true,
-    volume: volume,
-  })
+  const { play, pause } = useSounds(volume)
 
   const handleClick = (event: MouseEvent) => {
-    if (event.currentTarget.id === 'muteButton') {
-      return null
-    }
+    if (event.currentTarget.id === 'muteButton') return null
 
-    if (timeLeft === '0:00') {
-      return null
-    }
+    if (timeLeft === '0:00') return null
 
-    if (isActive) {
-      pause()
-    } else {
-      play()
-    }
+    isActive ? pause() : play()
+
     setIsActive(!isActive)
     setButtonText(
       buttonText === 'START' || buttonText === 'RESUME' ? 'PAUSE' : 'RESUME',
@@ -81,9 +64,7 @@ const TimerDisplay = () => {
           text={timeText}
           strokeWidth={4}
           styles={buildStyles({
-            // How long animation takes to go from one percentage to another, in seconds
             pathTransitionDuration: 0.5,
-            // Colors & Fonts
             pathColor: 'var(--accent-color)',
             textColor: 'var(--text)',
             textSize: textSize,

@@ -1,8 +1,7 @@
-import useSound from 'use-sound'
 import { useStatesContext } from '@/core/context'
-import clickSfx from '@/sounds/slide.mp3'
 import { IMapedNumbers } from '@/core/types'
 import { Controller, useForm } from 'react-hook-form'
+import { useSounds } from '@/core/utils'
 
 const Controls = () => {
   const {
@@ -17,7 +16,7 @@ const Controls = () => {
     volume,
   } = useStatesContext()
 
-  const [playSfx] = useSound(clickSfx, { volume: volume })
+  const { click } = useSounds(volume)
 
   const { control } = useForm()
 
@@ -25,7 +24,7 @@ const Controls = () => {
     setTimerMode(mode)
     setIsActive(false)
     setButtonText('START')
-    playSfx()
+    click()
 
     const getSecondsLeft: IMapedNumbers = {
       pomo: pomoLength,
