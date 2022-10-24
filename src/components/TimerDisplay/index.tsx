@@ -60,6 +60,7 @@ const TimerDisplay = () => {
     <div className='timer' onClick={handleClick}>
       <div className='timer__display'>
         <CircularProgressbarWithChildren
+          className='timer__display__circular'
           value={Percentage()}
           text={timeText}
           strokeWidth={4}
@@ -72,7 +73,7 @@ const TimerDisplay = () => {
           })}
         >
           <MuteToggle />
-          <button className='display__start-pause' onClick={handleClick}>
+          <button className='timer__display__start-pause' onClick={handleClick}>
             {buttonText}
           </button>
         </CircularProgressbarWithChildren>

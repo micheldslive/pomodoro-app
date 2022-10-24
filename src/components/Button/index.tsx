@@ -39,7 +39,10 @@ export const Button = ({ type, buttonText = '' }: ButtonProps) => {
 
   if (type === 'close') {
     return (
-      <button className='pane__close-preferences' onClick={toggleVisibility}>
+      <button
+        className='pomodoro-app__close-preferences'
+        onClick={toggleVisibility}
+      >
         {buttonText}
       </button>
     )
@@ -47,11 +50,11 @@ export const Button = ({ type, buttonText = '' }: ButtonProps) => {
 
   if (type === 'apply') {
     return (
-      <div className='pane__apply-row'>
+      <div className='preferences__pane__apply-row'>
         <input
           type='submit'
           value={buttonText}
-          className='pane__apply-preferences'
+          className='preferences__pane__apply-row__apply-preferences'
         />
       </div>
     )
