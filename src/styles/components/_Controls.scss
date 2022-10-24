@@ -12,6 +12,7 @@
     opacity: 0;
     position: fixed;
     width: 0;
+    transition: 0.5s ease-in-out;
 
     &:checked {
       & + label {
@@ -20,7 +21,7 @@
         background: var(--accent-color);
         animation-name: fade;
         animation-timing-function: ease-in;
-        animation-duration: 0.05s;
+        animation-duration: 0.3s;
       }
     }
   }
