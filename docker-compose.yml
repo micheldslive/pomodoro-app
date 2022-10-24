@@ -1,0 +1,9 @@
+version: '3.6'
+
+services:
+  pomodoro:
+    ports:
+      - 5173:5173
+    build:
+      context: .
+      dockerfile: Dockerfile
