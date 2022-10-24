@@ -1,4 +1,5 @@
 import './App.css'
+import './styles/main.scss'
 import Header from '@/components/Header'
 import Controls from '@/components/Controls'
 import TimerDisplay from '@/components/TimerDisplay'

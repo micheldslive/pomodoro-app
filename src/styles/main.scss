@@ -1,0 +1,11 @@
+@import './utils/vars';
+@import './utils/mixins';
+@import './globals';
+
+@import './components/Header';
+
+.pomodoro-app {
+  @include flex(center, '', column, '', '');
+  height: 667px;
+  font-family: $fontCurrent;
+}

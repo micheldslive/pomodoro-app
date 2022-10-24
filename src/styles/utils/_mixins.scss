@@ -1,0 +1,120 @@
+// TEST MIXIN
+
+@function check($value) {
+  @if not $value or $value == '' or $value == () or length($value) == 0 {
+    @return null;
+  }
+  @return $value;
+}
+
+// @include font-size($font-size);
+// @include font-size(16);
+@mixin font-size($size-value: $font-size) {
+  font-size: calc($size-value / $font-size) + rem;
+}
+
+// Define a base da fonte que pretende utilizar (valores ja são convertidos em rem).
+
+$font-size: 16; // tamanho padrão
+$line-height: 16; // tamanho padrão
+
+@mixin line-height($size-value: $line-height) {
+  line-height: calc($size-value / $line-height) + rem;
+}
+
+@mixin letter-spacing($letterspacing) {
+  letter-spacing: calc($letterspacing / 1000) * 1em;
+}
+
+//  @include text(font-family, color, font-size, font-weight, line-height, text-align, text-transform, letter-spacing);
+
+@mixin text(
+  $family: $fontCurrent,
+  $color: $black,
+  $fontSize: $font-size,
+  $fontWeight: $fontRegular,
+  $line-height: $line-height,
+  $textAlign: left,
+  $textTransform: initial,
+  $letterspacing: $letterspacing
+) {
+  font-family: check($family);
+  color: check($color);
+  @include font-size(check($fontSize));
+  font-weight: check($fontWeight);
+  @include line-height(check($line-height));
+  @include letter-spacing(check($letterspacing));
+  text-align: check($textAlign);
+  text-transform: check($textTransform);
+}
+
+//  @include flex(align-items, justify-content, flex-direction, gap, flex-wrap);
+
+@mixin flex($align, $justify, $direction, $gap, $wrap) {
+  display: flex;
+  align-items: check($align);
+  justify-content: check($justify);
+  @if (check($gap)) {
+    gap: $gap + rem;
+  }
+  @if (check($direction)) {
+    flex-direction: $direction;
+  } @else {
+    flex-direction: row;
+  }
+  flex-wrap: check($wrap);
+}
+
+// @include grid(grid-template-columns, num-coluns-repeat, column-gap, row-gap);
+
+@mixin grid(
+  $grid-type,
+  $num-of-cols,
+  $width-cols,
+  $row-gap,
+  $column-gap: $row-gap
+) {
+  @supports (display: grid) {
+    display: grid;
+    @if (check($grid-type) & check($num-of-cols) & check($width-cols)) {
+      #{$grid-type}: repeat($num-of-cols, $width-cols);
+    }
+    @if (check($row-gap)) {
+      row-gap: $row-gap + rem;
+    }
+    @if (check($column-gap)) {
+      column-gap: $row-gap + rem;
+    }
+  }
+}
+
+// @include ps(position, top, left, button, right);
+
+@mixin ps($position, $top, $left, $button, $right) {
+  @if (check($position)) {
+    position: $position;
+    top: check($top);
+    left: check($left);
+    bottom: check($button);
+    right: check($right);
+  }
+}
+
+$breakpoints: (
+  '360': 360px,
+  '480': 480px,
+  '1024': 1024px,
+  '1280': 1280px,
+);
+
+@mixin mq($width, $type: min) {
+  @if map_has_key($breakpoints, $width) {
+    $width: map_get($breakpoints, $width);
+    @if $type == max {
+      $width: $width - 1px;
+    }
+    @media only screen and (#{$type}-width: $width) {
+      @content;
+    }
+  }
+}
