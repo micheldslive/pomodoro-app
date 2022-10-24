@@ -3,7 +3,11 @@ interface HeaderProps {
 }
 
 const Header = ({ title }: HeaderProps) => {
-  return <h1>{title}</h1>
+  return (
+    <header className='header'>
+      <h1 className='header__title'>{title}</h1>
+    </header>
+  )
 }
 
 export default Header
