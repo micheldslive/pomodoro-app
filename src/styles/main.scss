@@ -2,10 +2,18 @@
 @import './utils/mixins';
 @import './globals';
 
-@import './components/Header';
-
 .pomodoro-app {
   @include flex(center, '', column, '', '');
   height: 667px;
-  font-family: $fontCurrent;
+
+  @include mq('600', 'max') {
+    height: 100%;
+  }
+
+  @import './components/Header';
+  @import './components/Button';
+  @import './components/Settings';
+  @import './components/MuteToggle';
+  @import './components/TimerDisplay';
+  @import './components/Controls';
 }

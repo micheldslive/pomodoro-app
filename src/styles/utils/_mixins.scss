@@ -103,9 +103,12 @@ $line-height: 16; // tamanho padrão
 $breakpoints: (
   '360': 360px,
   '480': 480px,
+  '600': 600px,
   '1024': 1024px,
   '1280': 1280px,
 );
+
+// @include mq(width, $type: min)
 
 @mixin mq($width, $type: min) {
   @if map_has_key($breakpoints, $width) {

@@ -1,5 +1,8 @@
-.header {
-  &__title {
-    @include text($fontCurrent, $text, 24, $fontBold, 24, center, '', 0);
+&__title {
+  padding-top: 2rem;
+  @include text(var(--font-current), $text, 24, $fontBold, 24, center, '', 0);
+
+  @include mq('600', 'max') {
+    @include text(var(--font-current), '', 32, $fontBold, 32, '', '', 0);
   }
 }
