@@ -1,0 +1,21 @@
+@import './utils/vars';
+@import './utils/mixins';
+@import './globals';
+
+@import './components/';
+@import './components/header';
+@import './components/logo';
+@import './components/search';
+@import './components/wishlist';
+@import './components/minicart';
+@import './components/cards';
+@import './components/add';
+@import './components/checkout';
+
+main {
+  padding-top: 6rem;
+
+  @media (max-width: 465px) {
+    padding-top: 14rem;
+  }
+}

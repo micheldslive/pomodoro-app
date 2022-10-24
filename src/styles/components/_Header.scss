@@ -1,0 +1,5 @@
+.header {
+  &__title {
+    @include text($fontCurrent, $text, 24, $fontBold, 24, center, '', 0);
+  }
+}
