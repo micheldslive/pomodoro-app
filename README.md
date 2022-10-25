@@ -17,7 +17,7 @@ Projeto realizado utilizando layout POMODORO FRONT END MENTOR.
 <h4 align="center">Layout: <a href="https://www.frontendmentor.io/challenges/pomodoro-app-KBFnycJ6G">hhttps://www.frontendmentor.io/challenges/pomodoro-app-KBFnycJ6G.</a></h4>
 
 <p align="center">
-  <img src="./.github/demo.gif" />
+  <img src="./.github/demo.jpg" />
 </p>
 
 <h4 align="center"><a href="https://pomodoro-app-micode.vercel.app/">Clique aqui para ver o projeto no vercel.</a></h4>
@@ -92,9 +92,6 @@ yarn dev
 docker compose up
 ```
 
-<p align="center">
-  <img src="./.github/demo-docker.gif" />
-</p>
 ---
 
 ### 📚 Testes

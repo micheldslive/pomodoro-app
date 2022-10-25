@@ -1,8 +1,9 @@
 import { useStatesContext } from '@/core/context'
-import { IMapedNumbers, IMapedStrings, ISettingsForm } from '@/core/types'
+import { ISettingsForm } from '@/core/types'
 import { Button } from '@/components/Button'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import classNames from 'classnames'
+import { Theme, useSounds } from '@/core/utils'
 
 const Settings = () => {
   const {
@@ -18,25 +19,14 @@ const Settings = () => {
     setFontPref,
     accentColor,
     setAccentColor,
-    setSecondsLeft,
-    timerMode,
+    volume,
   } = useStatesContext()
-
-  const colors: IMapedStrings = {
-    default: '#F87070',
-    blue: '#70F3F8',
-    purple: '#D881F8',
-  }
-
-  const fonts: IMapedStrings = {
-    kumbh: `'Kumbh Sans', sans-serif`,
-    roboto: `'Roboto Slab', serif`,
-    space: `'Space Mono', monospace`,
-  }
 
   const styles = document.documentElement.style
 
   const { handleSubmit, register } = useForm<ISettingsForm>()
+  const { colors, fonts } = Theme()
+  const { play } = useSounds(volume)
 
   const applySettings: SubmitHandler<ISettingsForm> = ({
     color,
@@ -45,23 +35,20 @@ const Settings = () => {
     pomodoro,
     shortBreak,
   }) => {
-    setPomoLength(pomodoro)
-    setShortLength(shortBreak)
-    setLongLength(longBreak)
-    setFontPref(font)
-    setAccentColor(color)
-    setSettingsVisible(false)
-
     styles.setProperty('--font-current', fonts[font])
     styles.setProperty('--accent-color', colors[color])
 
-    const getSecondsLeft: IMapedNumbers = {
-      pomo: pomoLength,
-      short: shortLength,
-      long: longLength,
-    }
+    pomoLength != pomodoro && setPomoLength(pomodoro)
+    shortLength != shortBreak && setShortLength(shortBreak)
+    longLength != longBreak && setLongLength(longBreak)
+    setFontPref(font)
+    setAccentColor(color)
+    handleCloseSettings()
+    play()
+  }
 
-    setSecondsLeft(getSecondsLeft[timerMode] * 60)
+  const handleCloseSettings = () => {
+    setSettingsVisible(false)
   }
 
   return (
@@ -72,6 +59,10 @@ const Settings = () => {
       )}
     >
       <div className='preferences__pane'>
+        <div
+          className='preferences__pane__overlay'
+          onClick={handleCloseSettings}
+        ></div>
         <div className='preferences__pane__title'>
           <h2>Settings</h2>
           <Button type='close' buttonText='×' />
