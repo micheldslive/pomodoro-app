@@ -7,9 +7,9 @@ import {
 } from '@/core/types'
 import { formatNumber } from '@/core/utils'
 
-const pomoLength = formatNumber(process.env.POMO_LENGTH, '25')
-const shortLength = formatNumber(process.env.SHORT_LENGTH, '3')
-const longLength = formatNumber(process.env.LONG_LENGTH, '15')
+const pomoLength = formatNumber(process?.env.VITE_POMO_LENGTH, '25')
+const shortLength = formatNumber(process?.env.VITE_SHORT_LENGTH, '3')
+const longLength = formatNumber(process?.env.VITE_LONG_LENGTH, '15')
 
 const initialStates: IStatesContext = {
   settingsVisible: false,
