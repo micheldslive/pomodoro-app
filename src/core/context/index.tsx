@@ -7,8 +7,6 @@ import {
 } from '@/core/types'
 import { formatNumber } from '../utils'
 
-console.log(import.meta.env.VITE_POMO_LENGTH)
-
 const pomoLength = formatNumber(import.meta.env.VITE_POMO_LENGTH, 25)
 const shortLength = formatNumber(import.meta.env.VITE_SHORT_LENGTH, 3)
 const longLength = formatNumber(import.meta.env.VITE_LONG_LENGTH, 15)
