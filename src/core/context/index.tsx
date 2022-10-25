@@ -5,11 +5,10 @@ import {
   IStatesDefaultValues,
   TActionStatesContext,
 } from '@/core/types'
-import { formatNumber } from '@/core/utils'
 
-const pomoLength = formatNumber(process?.env.VITE_POMO_LENGTH, '25')
-const shortLength = formatNumber(process?.env.VITE_SHORT_LENGTH, '3')
-const longLength = formatNumber(process?.env.VITE_LONG_LENGTH, '15')
+const pomoLength = 25
+const shortLength = 3
+const longLength = 15
 
 const initialStates: IStatesContext = {
   settingsVisible: false,
