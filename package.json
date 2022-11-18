@@ -14,7 +14,8 @@
     "type-check": "tsc --project tsconfig.json --pretty --noEmit",
     "prepare": "husky install",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "startbook": "build-storybook -c .storybook -o .startbook"
   },
   "dependencies": {
     "babel-eslint": "^10.1.0",
