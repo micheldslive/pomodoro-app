@@ -15,8 +15,8 @@ const formatTimeLeft = (seconds: number) => {
   }`
 }
 
-const formatNumber = (EnvValue: string | undefined, defaultNumber: number) => {
-  return EnvValue ? parseInt(EnvValue) : defaultNumber
+const formatNumber = (envValue: string | undefined, defaultNumber: number) => {
+  return envValue ? parseInt(envValue) : defaultNumber
 }
 
 const useSounds = (volume: number) => {
