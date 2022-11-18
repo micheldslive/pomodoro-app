@@ -16,12 +16,12 @@ export default {
     text: disable,
     volume: disable,
     fontPref: {
-      defaultValue: 'kumbh',
-      control: { type: 'select', options: ['kumbh', 'roboto', 'space'] },
+      value: 'kumbh',
+      control: { type: 'select', labels: ['kumbh', 'roboto', 'space'] },
     },
     accentColor: {
-      defaultValue: 'default',
-      control: { type: 'select', options: ['default', 'blue', 'purple'] },
+      value: 'default',
+      control: { type: 'select', labels: ['default', 'blue', 'purple'] },
     },
   },
 } as ComponentMeta<typeof SettingsComponent>
