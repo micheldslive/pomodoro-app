@@ -22,8 +22,8 @@ export default {
     secondsLeft: disable,
     volume: disable,
     timerMode: {
-      defaultValue: 'pomo',
-      control: { type: 'inline-radio', options: ['pomo', 'short', 'long'] },
+      value: 'pomo',
+      control: { type: 'inline-radio', labels: ['pomo', 'short', 'long'] },
     },
   },
 } as ComponentMeta<typeof ControlsComponent>
