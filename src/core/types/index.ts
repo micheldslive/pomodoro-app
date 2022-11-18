@@ -1,11 +1,9 @@
 import React from 'react'
-
 export interface IChildren {
   children: React.ReactNode
 }
-
 export interface IStatesContext {
-  settingsVisible: boolean
+  settings: boolean
   timerMode: string
   pomoLength: number
   shortLength: number
@@ -14,12 +12,11 @@ export interface IStatesContext {
   accentColor: string
   secondsLeft: number
   isActive: boolean
-  buttonText: string
-  volume: number
+  text: string
+  volume: boolean
 }
-
 export interface IStatesDefaultValues extends IStatesContext {
-  setSettingsVisible(settingsVisible: boolean): void
+  setSettings(settings: boolean): void
   setTimerMode(timerMode: string): void
   setPomoLength(pomoLength: number): void
   setShortLength(shortLength: number): void
@@ -28,12 +25,12 @@ export interface IStatesDefaultValues extends IStatesContext {
   setAccentColor(accentColor: string): void
   setSecondsLeft(secondsLeft: number): void
   setIsActive(isActive: boolean): void
-  setButtonText(buttonText: string): void
-  setVolume(volume: number): void
+  setText(text: string): void
+  setVolume(volume: boolean): void
 }
 
 export type TActionStatesContext =
-  | { type: 'settingsVisible'; settingsVisible: boolean }
+  | { type: 'settings'; settings: boolean }
   | { type: 'timerMode'; timerMode: string }
   | { type: 'pomoLength'; pomoLength: number }
   | { type: 'shortLength'; shortLength: number }
@@ -42,7 +39,7 @@ export type TActionStatesContext =
   | { type: 'accentColor'; accentColor: string }
   | { type: 'secondsLeft'; secondsLeft: number }
   | { type: 'isActive'; isActive: boolean }
-  | { type: 'buttonText'; buttonText: string }
+  | { type: 'text'; text: string }
   | { type: 'volume'; volume: number }
 
 export interface IMapedNumbers {
@@ -59,4 +56,12 @@ export interface ISettingsForm {
   longBreak: number
   font: string
   color: string
+}
+
+export interface IHeader {
+  text?: string
+}
+
+export interface IButtons extends IHeader {
+  type?: string
 }
