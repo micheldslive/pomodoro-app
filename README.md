@@ -20,7 +20,8 @@ Projeto realizado utilizando layout POMODORO FRONT END MENTOR.
   <img src="./.github/demo.jpg" />
 </p>
 
-<h4 align="center"><a href="https://pomodoro-app-micode.vercel.app/">Clique aqui para ver o projeto no vercel.</a></h4>
+<h4 align="center"><a href="https://pomodoro-app-micode.vercel.app/">Clique aqui para abrir o projeto no vercel.</a></h4>
+<h4 align="center"><a href="https://pomodoro-app-storybook.vercel.app/">Clique aqui para abrir a documentação dos componentes (storybook)</a></h4>
 
 ---
 
@@ -41,6 +42,7 @@ O projeto foi desenvolvido com as seguintes tecnologias:
 - [react-circular-progressbar](https://www.npmjs.com/package/react-circular-progressbar)
 - [use-sound](https://www.npmjs.com/package/use-sound)
 - [react-hook-form](https://www.npmjs.com/package/react-hook-form)
+- [storybook](https://storybook.js.org/)
 
 ---
 
