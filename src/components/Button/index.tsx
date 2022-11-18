@@ -1,13 +1,9 @@
-import { useStatesContext } from '@/core/context'
+import { useStore } from '@/core/zustand'
+import { IButtons } from '@/core/types'
 
-interface ButtonProps {
-  type?: string
-  buttonText?: string
-}
-
-export const Button = ({ type, buttonText = '' }: ButtonProps) => {
-  const { settingsVisible, setSettingsVisible } = useStatesContext()
-  const toggleVisibility = () => setSettingsVisible(!settingsVisible)
+export const Button = ({ type, text = '' }: IButtons) => {
+  const { settings, setSettings } = useStore()
+  const toggleSettings = () => setSettings(!settings)
 
   if (type === 'settings') {
     return (
@@ -15,7 +11,7 @@ export const Button = ({ type, buttonText = '' }: ButtonProps) => {
         className='pomodoro-app__preferences'
         name='settings'
         title='show preferences pane'
-        onClick={toggleVisibility}
+        onClick={toggleSettings}
       >
         <svg
           width='28'
@@ -41,9 +37,9 @@ export const Button = ({ type, buttonText = '' }: ButtonProps) => {
     return (
       <button
         className='pomodoro-app__close-preferences'
-        onClick={toggleVisibility}
+        onClick={toggleSettings}
       >
-        {buttonText}
+        {text}
       </button>
     )
   }
@@ -53,7 +49,7 @@ export const Button = ({ type, buttonText = '' }: ButtonProps) => {
       <div className='preferences__pane__apply-row'>
         <input
           type='submit'
-          value={buttonText}
+          value={text}
           className='preferences__pane__apply-row__apply-preferences'
         />
       </div>

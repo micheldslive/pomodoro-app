@@ -1,11 +1,9 @@
-interface HeaderProps {
-  title: string
-}
+import { IHeader } from "@/core/types"
 
-const Header = ({ title }: HeaderProps) => {
+const Header = ({ text }: IHeader) => {
   return (
     <header>
-      <h1 className='pomodoro-app__title'>{title}</h1>
+      <h1 className='pomodoro-app__title'>{text}</h1>
     </header>
   )
 }

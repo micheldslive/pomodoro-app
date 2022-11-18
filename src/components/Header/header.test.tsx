@@ -4,7 +4,7 @@ import Header from '.'
 
 describe('<Header />', () => {
   test('renders pomodoro in Header title', () => {
-    const { getByText } = getRenderer(<Header title='pomodoro' />)
+    const { getByText } = getRenderer(<Header text='pomodoro' />)
     const appTitle = getByText(/pomodoro/i)
     expect(appTitle).toBeInTheDocument()
   })

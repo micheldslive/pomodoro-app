@@ -1,10 +1,11 @@
-import { useStatesContext } from '@/core/context'
+import { useStore } from '@/core/zustand'
+import { memo } from 'react'
 
-export const MuteToggle = () => {
-  const { volume, setVolume } = useStatesContext()
+const MuteToggle = ({ volume }: { volume: boolean }) => {
+  const { setVolume } = useStore()
 
   const handleClick = () => {
-    setVolume(volume ? 0 : 1)
+    setVolume(!volume)
   }
 
   return (
@@ -53,3 +54,6 @@ export const MuteToggle = () => {
     </button>
   )
 }
+
+
+export default memo(MuteToggle)

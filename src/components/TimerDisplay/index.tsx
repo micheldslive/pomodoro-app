@@ -1,27 +1,25 @@
-import { MuteToggle } from '@/components/MuteToggle'
+import MuteToggle from '@/components/MuteToggle'
 import {
   CircularProgressbarWithChildren,
   buildStyles,
 } from 'react-circular-progressbar'
 import 'react-circular-progressbar/dist/styles.css'
-import { useStatesContext } from '@/core/context'
-import { IMapedNumbers } from '@/core/types'
+import { IMapedNumbers, IStatesContext } from '@/core/types'
 import { calcPercentage, formatTimeLeft, useSounds } from '@/core/utils'
 import { MouseEvent } from 'react'
+import { useStore } from '@/core/zustand'
 
-const TimerDisplay = () => {
-  const {
-    timerMode,
-    pomoLength,
-    shortLength,
-    longLength,
-    secondsLeft,
-    isActive,
-    setIsActive,
-    buttonText,
-    setButtonText,
-    volume,
-  } = useStatesContext()
+const TimerDisplay = ({
+  timerMode,
+  pomoLength,
+  shortLength,
+  longLength,
+  secondsLeft,
+  isActive,
+  text,
+  volume,
+}: IStatesContext) => {
+  const { setIsActive, setText } = useStore()
 
   const Percentage = () => {
     const type: IMapedNumbers = {
@@ -35,7 +33,7 @@ const TimerDisplay = () => {
 
   const timeLeft = formatTimeLeft(secondsLeft)
 
-  const { play, pause } = useSounds(volume)
+  const { play, pause } = useSounds(Number(volume))
 
   const handleClick = (event: MouseEvent) => {
     if (event.currentTarget.id === 'muteButton') return null
@@ -45,8 +43,8 @@ const TimerDisplay = () => {
     isActive ? pause() : play()
 
     setIsActive(!isActive)
-    setButtonText(
-      buttonText === 'START' || buttonText === 'RESUME' ? 'PAUSE' : 'RESUME',
+    setText(
+      text === 'START' || text === 'RESUME' ? 'PAUSE' : 'RESUME',
     )
   }
 
@@ -72,9 +70,9 @@ const TimerDisplay = () => {
             trailColor: 'none',
           })}
         >
-          <MuteToggle />
+          <MuteToggle volume={volume} />
           <button className='timer__display__start-pause' onClick={handleClick}>
-            {buttonText}
+            {text}
           </button>
         </CircularProgressbarWithChildren>
       </div>

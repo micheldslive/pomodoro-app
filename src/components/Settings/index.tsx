@@ -1,32 +1,33 @@
-import { useStatesContext } from '@/core/context'
-import { ISettingsForm } from '@/core/types'
+import { ISettingsForm, IStatesContext } from '@/core/types'
 import { Button } from '@/components/Button'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import classNames from 'classnames'
 import { Theme, useSounds } from '@/core/utils'
+import { useStore } from '@/core/zustand'
 
-const Settings = () => {
+const Settings = ({
+  settings,
+  pomoLength,
+  shortLength,
+  longLength,
+  fontPref,
+  accentColor,
+  volume,
+}: IStatesContext) => {
   const {
-    settingsVisible,
-    setSettingsVisible,
-    pomoLength,
+    setSettings,
     setPomoLength,
-    shortLength,
     setShortLength,
-    longLength,
     setLongLength,
-    fontPref,
     setFontPref,
-    accentColor,
     setAccentColor,
-    volume,
-  } = useStatesContext()
+  } = useStore()
 
   const styles = document.documentElement.style
 
   const { handleSubmit, register } = useForm<ISettingsForm>()
   const { colors, fonts } = Theme()
-  const { play } = useSounds(volume)
+  const { play } = useSounds(Number(volume))
 
   const applySettings: SubmitHandler<ISettingsForm> = ({
     color,
@@ -48,15 +49,12 @@ const Settings = () => {
   }
 
   const handleCloseSettings = () => {
-    setSettingsVisible(false)
+    setSettings(false)
   }
 
   return (
     <div
-      className={classNames(
-        'preferences',
-        settingsVisible && 'preferences-visible',
-      )}
+      className={classNames('preferences', settings && 'preferences-visible')}
     >
       <div className='preferences__pane'>
         <div
@@ -65,7 +63,7 @@ const Settings = () => {
         ></div>
         <div className='preferences__pane__title'>
           <h2>Settings</h2>
-          <Button type='close' buttonText='×' />
+          <Button type='close' text='×' />
         </div>
         <form onSubmit={handleSubmit(applySettings)}>
           <div className='preferences__pane__time-settings'>
@@ -77,8 +75,10 @@ const Settings = () => {
                 id='pomodoro'
                 min='5'
                 max='90'
-                defaultValue={pomoLength}
-                {...register('pomodoro')}
+                value={pomoLength}
+                {...register('pomodoro', {
+                  onChange: ({ currentTarget }) => setPomoLength(currentTarget.value)
+                })}
               />
               <label htmlFor='short-break'>short break</label>
               <input
@@ -86,8 +86,10 @@ const Settings = () => {
                 id='short-break'
                 min='1'
                 max='14'
-                defaultValue={shortLength}
-                {...register('shortBreak')}
+                value={shortLength}
+                {...register('shortBreak', {
+                  onChange: ({ currentTarget }) => setShortLength(currentTarget.value)
+                })}
               />
               <label htmlFor='long-break'>long break</label>
               <input
@@ -95,8 +97,10 @@ const Settings = () => {
                 id='long-break'
                 min='15'
                 max='30'
-                defaultValue={longLength}
-                {...register('longBreak')}
+                value={longLength}
+                {...register('longBreak', {
+                  onChange: ({ currentTarget }) => setLongLength(currentTarget.value)
+                })}
               />
             </div>
           </div>
@@ -107,8 +111,10 @@ const Settings = () => {
               type='radio'
               id='fontPref1'
               value='kumbh'
-              defaultChecked={fontPref === 'kumbh'}
-              {...register('font')}
+              checked={fontPref === 'kumbh'}
+              {...register('font', {
+                onChange: ({ currentTarget }) => setFontPref(currentTarget.value)
+              })}
             />
             <label
               htmlFor='fontPref1'
@@ -120,8 +126,10 @@ const Settings = () => {
               type='radio'
               id='fontPref2'
               value='roboto'
-              defaultChecked={fontPref === 'roboto'}
-              {...register('font')}
+              checked={fontPref === 'roboto'}
+              {...register('font', {
+                onChange: ({ currentTarget }) => setFontPref(currentTarget.value)
+              })}
             />
             <label
               htmlFor='fontPref2'
@@ -133,8 +141,10 @@ const Settings = () => {
               type='radio'
               id='fontPref3'
               value='space'
-              defaultChecked={fontPref === 'space'}
-              {...register('font')}
+              checked={fontPref === 'space'}
+              {...register('font', {
+                onChange: ({ currentTarget }) => setFontPref(currentTarget.value)
+              })}
             />
             <label
               htmlFor='fontPref3'
@@ -150,8 +160,10 @@ const Settings = () => {
               type='radio'
               id='colorPref1'
               value='default'
-              defaultChecked={accentColor === 'default'}
-              {...register('color')}
+              checked={accentColor === 'default'}
+              {...register('color', {
+                onChange: ({ currentTarget }) => setAccentColor(currentTarget.value)
+              })}
             />
             <label
               htmlFor='colorPref1'
@@ -162,8 +174,10 @@ const Settings = () => {
               type='radio'
               id='colorPref2'
               value='blue'
-              defaultChecked={accentColor === 'blue'}
-              {...register('color')}
+              checked={accentColor === 'blue'}
+              {...register('color', {
+                onChange: ({ currentTarget }) => setAccentColor(currentTarget.value)
+              })}
             />
             <label
               htmlFor='colorPref2'
@@ -174,15 +188,17 @@ const Settings = () => {
               type='radio'
               id='colorPref3'
               value='purple'
-              defaultChecked={accentColor === 'purple'}
-              {...register('color')}
+              checked={accentColor === 'purple'}
+              {...register('color', {
+                onChange: ({ currentTarget }) => setAccentColor(currentTarget.value)
+              })}
             />
             <label
               htmlFor='colorPref3'
               className='preferences__pane__color-preference__purple'
             ></label>
           </div>
-          <Button type='apply' buttonText='Apply' />
+          <Button type='apply' text='Apply' />
         </form>
       </div>
     </div>
