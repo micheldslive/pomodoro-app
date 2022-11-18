@@ -1,29 +1,26 @@
-import { useStatesContext } from '@/core/context'
-import { IMapedNumbers } from '@/core/types'
+import { IMapedNumbers, IStatesContext } from '@/core/types'
 import { Controller, useForm } from 'react-hook-form'
 import { useSounds } from '@/core/utils'
+import { useStore } from '@/core/zustand'
 
-const Controls = () => {
-  const {
-    timerMode,
-    setTimerMode,
-    pomoLength,
-    shortLength,
-    longLength,
-    setSecondsLeft,
-    setIsActive,
-    setButtonText,
-    volume,
-  } = useStatesContext()
+const Controls = ({
+  timerMode,
+  pomoLength,
+  shortLength,
+  longLength,
+  volume,
+}: IStatesContext) => {
+  const { setTimerMode, setSecondsLeft, setIsActive, setText } =
+    useStore()
 
-  const { click } = useSounds(volume)
+  const { click } = useSounds(Number(volume))
 
   const { control } = useForm()
 
   const handleModeChange = (mode: string) => {
     setTimerMode(mode)
     setIsActive(false)
-    setButtonText('START')
+    setText('START')
     click()
 
     const getSecondsLeft: IMapedNumbers = {
@@ -45,9 +42,7 @@ const Controls = () => {
             type='radio'
             id='pomo'
             checked={timerMode === 'pomo'}
-            onChange={(event) => {
-              handleModeChange(event.currentTarget.id)
-            }}
+            onChange={({ currentTarget }) => handleModeChange(currentTarget.id)}
           />
         )}
       />
@@ -63,9 +58,7 @@ const Controls = () => {
             type='radio'
             id='short'
             checked={timerMode === 'short'}
-            onChange={(event) => {
-              handleModeChange(event.currentTarget.id)
-            }}
+            onChange={({ currentTarget }) => handleModeChange(currentTarget.id)}
           />
         )}
       />
@@ -81,9 +74,7 @@ const Controls = () => {
             type='radio'
             id='long'
             checked={timerMode === 'long'}
-            onChange={(event) => {
-              handleModeChange(event.currentTarget.id)
-            }}
+            onChange={({ currentTarget }) => handleModeChange(currentTarget.id)}
           />
         )}
       />
