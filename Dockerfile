@@ -1,11 +1,5 @@
-FROM node:14-alpine
+FROM node:16-alpine
 
-WORKDIR /pomodoro-app
+WORKDIR /app
 
 COPY . .
-
-RUN yarn
-
-EXPOSE 5173
-
-CMD ["yarn","dev"]

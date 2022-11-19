@@ -1,9 +1,13 @@
-version: '3.6'
+version: "3"
 
 services:
-  pomodoro:
+  web:
+    build: .
+    container_name: pomodoro
+    restart: always
+    volumes:
+      - ./:/app
     ports:
       - 5173:5173
-    build:
-      context: .
-      dockerfile: Dockerfile
+    command: >
+      sh -c "yarn && yarn dev"
